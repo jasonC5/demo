@@ -1,0 +1,34 @@
+package com.jason.temp.io;
+
+import java.io.*;
+
+public class InputStreamReaderDemo {
+    public static void main(String[] args) {
+        File file = new File("4.txt");
+        FileInputStream fileInputStream = null;
+        InputStreamReader inputStreamReader = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            inputStreamReader = new InputStreamReader(fileInputStream);//网络获取到inputStream 、 OutputStream 的时候，套一层，提高效率
+            char[] chars = new char[1024];
+            int length = inputStreamReader.read(chars);
+            System.out.println(new String(chars,0,length));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStreamReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fileInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
