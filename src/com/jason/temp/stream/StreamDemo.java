@@ -1,9 +1,6 @@
 package com.jason.temp.stream;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -111,5 +108,12 @@ public class StreamDemo {
         System.out.println("######################");
         List<String> stringList = Stream.of(str2.split(",")).map(x -> x.split("")).flatMap(Arrays::stream).distinct().collect(Collectors.toList());
         stringList.forEach(System.out::println);
+
+        //
+        String str3 = "zhangsan,lisi,wangwu";
+        List<Person> personList = Stream.of(str2.split(",")).map(x->new Person(x)).collect(Collectors.toList());
+        //list转map分组
+        Map<String,List<Person>> peopleMap = personList.stream().collect(Collectors.groupingBy(Person::getName));
+        peopleMap.keySet().forEach(System.out::println);
     }
 }
